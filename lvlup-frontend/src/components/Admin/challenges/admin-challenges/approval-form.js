@@ -1,39 +1,8 @@
 import { Form, Grid } from 'semantic-ui-react';
-import { Field, reduxForm } from 'redux-form';
+import { Field } from 'redux-form';
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { submissionFormAdmin } from '../../../../actions/challenge-review';
-
-const mapDispatchToProps = dispatch => bindActionCreators({ submissionFormAdmin }, dispatch);
-
-const renderSelectField = ({ input, label, type, meta: { touched, error }, children }) => (
-  <div>
-    <label>{label}</label>
-    <div>
-      <select {...input}>
-        {children}
-      </select>
-      {touched && error && <span>{error}</span>}
-    </div>
-  </div>
-);
-
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
-  <div>
-    <label>{label}</label>
-    <div>
-      <input {...input} placeholder={label} type={type} />
-      {touched && ((error && <span>{error}</span>))}
-    </div>
-  </div>
-);
-
-const mapStateToProps = state => ({
-  selectedChallenge: state.selectedChallenge,
-});
-
-const required = value => value ? undefined : 'Required';
+import { renderField, renderSelectField } from '../../helpers/render-fields';
+import { required } from '../../helpers/validations';
 
 class SubmissionApprovalForm extends Component {
   constructor(props) {
@@ -86,7 +55,6 @@ class SubmissionApprovalForm extends Component {
           </Grid>
           <Grid centered>
             <Grid.Row>
-
               <Form.Button basic color="orange">Submit Review</Form.Button>
             </Grid.Row>
           </Grid>
@@ -96,6 +64,4 @@ class SubmissionApprovalForm extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
-  form: 'submissionApproval',
-})(SubmissionApprovalForm));
+export default SubmissionApprovalForm;

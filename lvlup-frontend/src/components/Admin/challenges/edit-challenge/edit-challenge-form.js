@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Container, Segment, Loader } from 'semantic-ui-react';
-import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import { allCampuses, setCampuses } from '../../../../actions/admin-signup';
-import { editChallenge } from '../../../../actions/edit-challenge';
-import { renderField, renderTextAreaField, renderSelectField, categories } from '../../admin-common/render-fields';
-import { required, number } from '../../admin-common/validations';
+import { Field } from 'redux-form';
+import { renderField, renderTextAreaField, renderSelectField, categories } from '../../helpers/render-fields';
+import { required, number } from '../../helpers/validations';
 import './edit-challenge-styles.css';
 
 class EditChallengeForm extends Component {
@@ -17,9 +14,7 @@ class EditChallengeForm extends Component {
     values.challenge_id = this.props.challenge.id;
     this.props.editChallenge(values);
   }
-  componentWillMount() {
-    this.props.allCampuses();
-  }
+
   render() {
     if (this.props.campuses.length === 0) {
       return <Loader active inline="centered"> Loading </Loader>;
@@ -150,30 +145,5 @@ class EditChallengeForm extends Component {
     );
   }
 }
-
-EditChallengeForm = reduxForm({
-  form: 'editChallenge',
-})(EditChallengeForm);
-
-/* Prepopulates form with data from state. Ternary statements only prepopulate requirement fields if requirements previously existed. */
-EditChallengeForm = connect(
-  state => ({
-    campuses: state.allCampuses,
-    challenge: state.selectedChallenge,
-    initialValues: {
-      id: state.selectedChallenge.id,
-      name: state.selectedChallenge.name,
-      point_value: state.selectedChallenge.point_value,
-      campus_id: state.selectedChallenge.campus_id,
-      category_id: state.selectedChallenge.category_id,
-      description: state.selectedChallenge.description,
-      requirements_1: state.selectedChallenge.requirements_1 ? state.selectedChallenge.requirements_1 : '',
-      requirements_2: state.selectedChallenge.requirements_2 ? state.selectedChallenge.requirements_2 : '',
-      requirements_3: state.selectedChallenge.requirements_3 ? state.selectedChallenge.requirements_3 : '',
-      requirements_4: state.selectedChallenge.requirements_4 ? state.selectedChallenge.requirements_4 : '',
-      requirements_5: state.selectedChallenge.requirements_5 ? state.selectedChallenge.requirements_5 : '',
-    },
-  }), { editChallenge, allCampuses, setCampuses },
-)(EditChallengeForm);
 
 export default EditChallengeForm;

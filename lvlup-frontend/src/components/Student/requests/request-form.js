@@ -1,18 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Form, Loader } from 'semantic-ui-react';
-import { Field, reduxForm } from 'redux-form';
-import { bindActionCreators } from 'redux';
-import { rewardRequest } from '../../../actions/student-rewards-actions';
-import { renderTextAreaField } from '../../Admin/admin-common/render-fields';
-import './request-styles.css';
-
-const mapStateToProps = state => ({
-  loginInfo: state.loginInfo,
-  reward: state.selectedReward,
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators({ rewardRequest }, dispatch);
+import { Field } from 'redux-form';
+import { renderTextAreaField } from '../../Admin/helpers/render-fields';
 
 class RewardRequestForm extends Component {
   constructor(props) {
@@ -21,8 +10,8 @@ class RewardRequestForm extends Component {
   }
 
   submit(values) {
-    values.student_id = this.props.loginInfo.id;
-    values.cohort_id = this.props.loginInfo.cohort_id;
+    values.student_id = this.props.studentLoginInfo.id;
+    values.cohort_id = this.props.studentLoginInfo.cohort_id;
     values.category_id = this.props.reward.category_id;
     values.reward_id = this.props.reward.id;
     this.props.rewardRequest(values);
@@ -52,4 +41,4 @@ class RewardRequestForm extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({ form: 'request' })(RewardRequestForm));
+export default RewardRequestForm;

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button, Header, Icon, Modal, Image, Grid } from 'semantic-ui-react';
-import RecruiterEmail from './recruiter-email';
+import RecruiterEmail from './recruiter-email-container';
 import './homeview.css';
 
 const RecruiterModal = () => (
-  <Modal trigger={<Button color="orange" inverted>Click Here for Demo Instructions</Button>}>
+  <Modal trigger={<Button color="orange" className="demo-button" inverted>Click Here for Demo Instructions</Button>}>
     <Modal.Header>Demonstration Version Instructions</Modal.Header>
     <Modal.Content image>
       <Image wrapped size="large" src={require('../../images/logo.png')} />

@@ -1,6 +1,15 @@
 exports[`test AdminConfiguration should render 1`] = `
-<div
-  className="admin-config">
-  <AccordionExampleStyled />
-</div>
+<AdminConfiguration
+  resetAddCohort={[Function]}
+  resetAdminCohort={[Function]}
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  } />
 `;

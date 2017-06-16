@@ -25,6 +25,7 @@ router.route('/auth/github')
 router.route('/auth/github/callback')
   .get(passport.authenticate('github'),
   (req, res) => {
+    console.log(req.session.passport);
     res.redirect('/student/dashboard');
   });
 
@@ -115,10 +116,9 @@ router.route('/admin/signup')
       confirmed: false,
     })
     .save())
-    .catch((err) => {
-      console.error(err);
-      res.status(400).json({ error: 'User already exists' });
-    })
+    .catch(err =>
+      // console.error(err);
+       res.status(400).json({ error: 'User already exists' }))
     .then((newAdmin) => {
       // save the admin and their cohorts they are apart of to the admin_cohort table
       const cohortsArr = req.body.cohorts;
@@ -131,10 +131,7 @@ router.route('/admin/signup')
       }
       Promise.all(promiseArr);
     })
-    .catch((err) => {
-      console.error(err);
-      res.json({ error: 'Server Error - Please Try Again' });
-    })
+    .catch(err => res.json({ error: 'Server Error - Please Try Again' }))
     .then(() => Admin.query({ where: { email: req.body.email } })
       .fetch())
     .then((admin) => {
@@ -161,7 +158,8 @@ router.route('/admin/signup')
       });
     })
     .catch((err) => {
-      console.error(err);
+      // res.json({ error: 'Server Error - Please Try Again' });
+      // console.error(err);
     });
   });
 

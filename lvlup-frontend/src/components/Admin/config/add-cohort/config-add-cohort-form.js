@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Form, Button, Loader, Container, Segment } from 'semantic-ui-react';
+import { Form, Loader, Container, Segment } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { renderField, renderSelectField } from '../../admin-common/render-fields';
-import { required } from '../../admin-common/validations';
+import { renderField, renderSelectField } from '../../helpers/render-fields';
+import { required } from '../../helpers/validations';
 import { allCampuses } from '../../../../actions/admin-signup';
 import { addCohort } from '../../../../actions/admin-config';
 
@@ -53,7 +53,7 @@ class AddACohortForm extends Component {
                   placeholder="Select Type"
                   validate={[required]}
                 >
-                  <option default>Select Campus</option>
+                  <option default>Select Type Of Cohort</option>
                   <option value="WDI">Web Development Immersive</option>
                   <option value="DSI">Data Science Immersive</option>
                 </Field>

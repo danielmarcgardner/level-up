@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
 import Home from './components/Home/home';
-import NavBar from './components/Navbar/navbar';
-import AdminSignUp from './components/Admin/signup/signup';
-import AdminLogin from './components/Admin/login/login';
-import SelectedChallenge from './components/Admin/challenges/admin-challenges/individual-challenge';
+import IndividualSubmission from './components/Admin/challenges/admin-challenges/individual-submission-container';
+import NavBar from './components/Navbar/navbar-container';
+import AdminSignUp from './components/Admin/signup/signup-container';
+import AdminLogin from './components/Admin/login/login-container';
 import AdminHome from './components/Admin/dashboard/dashboard-main';
-import AdminChallenges from './components/Admin/challenges/admin-challenges/challenges-main';
-import AdminRewards from './components/Admin/rewards/admin-rewards/rewards-main';
+import AdminChallenges from './components/Admin/challenges/admin-challenges/challenges-container';
+import AdminRewards from './components/Admin/rewards/admin-rewards/rewards-container';
 import AddChallenge from './components/Admin/challenges/add-challenge/add-challenge-main';
 import EditChallenge from './components/Admin/challenges/edit-challenge/edit-challenge-main';
-import AddReward from './components/Admin/rewards/add-reward//add-reward-main';
-import EditReward from './components/Admin/rewards/edit-reward/edit-reward-main';
-import StudentChallenges from './components/Student/challenges/challenges-main';
+import AddReward from './components/Admin/rewards/add-reward/added-reward-container';
+import EditReward from './components/Admin/rewards/edit-reward/edited-reward-container';
+import StudentChallenges from './components/Student/challenges/challenges-container';
 import SubmissionMain from './components/Student/submissions/submission-main';
-import StudentRewards from './components/Student/rewards/rewards-main';
-import StudentRewardRequest from './components/Student/requests/request-main';
-import StudentSidenav from './components/Student/nav/sidenav';
-import AdminSidenav from './components/Admin/nav/sidenav';
-import StudentDashboard from './components/Student/dashboard/dashboard-main';
+import StudentRewardsTable from './components/Student/rewards/rewards-main';
+import StudentRewardRequest from './components/Student/requests/request-container';
+import StudentSidenav from './components/Student/nav/sidenav-container';
+import AdminSidenav from './components/Admin/nav/sidenav-container';
+import StudentDashboard from './components/Student/dashboard/dashboard-container';
 import AdminConfiguration from './components/Admin/config/config-main';
-import AddCohortPage from './components/Admin/config/add-cohort/add-cohort';
+import AddCohortPage from './components/Admin/config/add-cohort/added-cohort-container';
+import AddAminCohort from './components/Admin/config/add-admin-cohort/added-admin-cohort-container';
 
 import './App.css';
 import {
@@ -51,12 +52,12 @@ export default class App extends Component {
                   <Route exact path="/student/dashboard" component={StudentDashboard} />
                   <Route exact path="/student/challenges" component={StudentChallenges} />
                   <Route path="/student/challenge-submission/:id" component={SubmissionMain} />
-                  <Route exact path="/student/rewards" component={StudentRewards} />
+                  <Route exact path="/student/rewards" component={StudentRewardsTable} />
                   <Route exact path="/student/reward-request/:id" component={StudentRewardRequest} />
                   <Route exact path="/login-admin" component={AdminLogin} />
                   <Route exact path="/signup-admin" component={AdminSignUp} />
                   <Route exact path="/admin/dashboard" component={AdminHome} />
-                  <Route exact path="/admin/individual-pending-challenge/:id" component={SelectedChallenge} />
+                  <Route exact path="/admin/pending-submission/:id" component={IndividualSubmission} />
                   <Route exact path="/admin/challenges" component={AdminChallenges} />
                   <Route exact path="/admin/rewards" component={AdminRewards} />
                   <Route exact path="/admin/challenge-add" component={AddChallenge} />
@@ -65,6 +66,7 @@ export default class App extends Component {
                   <Route exact path="/admin/reward-edit/:id" component={EditReward} />
                   <Route exact path="/admin/configuration" component={AdminConfiguration} />
                   <Route exact path="/admin/configuration/addcohort" component={AddCohortPage} />
+                  <Route exact path="/admin/configuration/addadmincohort" component={AddAminCohort} />
                 </Grid.Column>
               </Grid.Row>
             </Grid>

@@ -1,7 +1,8 @@
 .reward-request {
-  /*width: 50%;
-  float: right;
-  margin-right: 25%;
-  margin-bottom: 20px;*/
   margin-top: 40px;
+}
+
+.insufficient-points {
+  padding: 40px;
+  margin-left: 210px;
 }

@@ -35,19 +35,20 @@
   text-align: center;
 }
 
-.ui.form select {
+/*.ui.form select {
   height: 37px !important;
-}
-  
-.signupPage{
+}*/
+
+.signupPage {
   margin-left: 210px;
   margin-top: 40px;
 }
 
-.signupText{
+.signupText {
   text-align: center;
 }
 
-/*.ui.form select {
-  height: 37px !important;
-}*/
+.successAdminCohort {
+  padding: 40px;
+  margin-top: 60px !important;
+}

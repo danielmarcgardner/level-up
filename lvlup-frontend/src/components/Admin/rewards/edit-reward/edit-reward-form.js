@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Form, Container, Segment, Loader } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { allCampuses, setCampuses } from '../../../../actions/admin-signup';
+import { allCampuses  } from '../../../../actions/admin-signup';
 import { editReward } from '../../../../actions/edit-reward';
-import { renderField, renderTextAreaField, renderSelectField, categories } from '../../admin-common/render-fields';
-import { required, number } from '../../admin-common/validations';
+import { renderField, renderTextAreaField, renderSelectField, categories } from '../../helpers/render-fields';
+import { required, number } from '../../helpers/validations';
 import './edit-reward-styles.css';
 
 class EditRewardForm extends Component {
@@ -19,7 +19,7 @@ class EditRewardForm extends Component {
     this.props.editReward(values);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.allCampuses();
   }
   render() {
@@ -120,7 +120,7 @@ EditRewardForm = connect(
       category_id: state.selectedReward.category_id,
       description: state.selectedReward.description,
     },
-  }), { editReward, allCampuses, setCampuses },
+  }), { editReward, allCampuses },
 )(EditRewardForm);
 
 export default EditRewardForm;
