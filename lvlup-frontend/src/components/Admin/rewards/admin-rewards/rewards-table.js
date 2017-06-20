@@ -1,6 +1,6 @@
 import React from 'react';
 import renderRewards from '../../helpers/render-rewards';
-import { Table, Container, Button, Loader, Icon } from 'semantic-ui-react';
+import { Table, Button, Loader, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import '../../dashboard/dashboard-styles.css';
 import './rewards-styles.css';
@@ -12,27 +12,54 @@ const RewardsTable = (props) => {
   }
   return (
     <div className="lvl-table">
-      <Container>
-        <Table celled>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell textAlign="center" colSpan="6">Rewards</Table.HeaderCell>
-            </Table.Row>
-            <Table.Row>
-              <Table.HeaderCell>Title <Icon name="sort alphabet ascending" /> <Icon name="sort alphabet descending" /></Table.HeaderCell>
-              <Table.HeaderCell>Category <Icon name="sort alphabet ascending" /> <Icon name="sort alphabet descending" /></Table.HeaderCell>
-              <Table.HeaderCell>Description</Table.HeaderCell>
-              <Table.HeaderCell textAlign="center">Edit</Table.HeaderCell>
-              <Table.HeaderCell textAlign="center">Remove</Table.HeaderCell>
-              <Table.HeaderCell textAlign="center">Points <Icon name="sort numeric ascending" /><Icon name="sort numeric descending" /></Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {renderRewards(props)}
-          </Table.Body>
-        </Table>
-        <Link to="/admin/reward-add"><Button basic color="orange" content="Add Reward" /></Link>
-      </Container>
+      <Table celled selectable>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell textAlign="center" colSpan="6" className="thead-sortable">Rewards
+                <Dropdown text="Sort" className="sort">
+                  <Dropdown.Menu>
+                    <Dropdown.Item
+                      text="by Title Ascending"
+                      onClick={() => props.sortRewardName()}
+                    />
+                    <Dropdown.Item
+                      text="by Title Descending"
+                      onClick={() => props.sortRewardNameReverse()}
+                    />
+                    <Dropdown.Item
+                      text="by Category Ascending"
+                      onClick={() => props.sortRewardCategory()}
+                    />
+                    <Dropdown.Item
+                      text="by Category Descending"
+                      onClick={() => props.sortRewardCategoryReverse()}
+                    />
+                    <Dropdown.Item
+                      text="by Points Ascending"
+                      onClick={() => props.sortRewardPoints()}
+                    />
+                    <Dropdown.Item
+                      text="by Points Descending"
+                      onClick={() => props.sortRewardPointsReverse()}
+                    />
+                  </Dropdown.Menu>
+                </Dropdown>
+            </Table.HeaderCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.HeaderCell className="thead-secondary">Title </Table.HeaderCell>
+            <Table.HeaderCell className="thead-secondary">Category </Table.HeaderCell>
+            <Table.HeaderCell className="thead-secondary">Description</Table.HeaderCell>
+            <Table.HeaderCell className="thead-secondary" textAlign="center">Edit</Table.HeaderCell>
+            <Table.HeaderCell className="thead-secondary" textAlign="center">Remove</Table.HeaderCell>
+            <Table.HeaderCell className="thead-secondary" textAlign="center">Points </Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {renderRewards(props)}
+        </Table.Body>
+      </Table>
+      <Link to="/admin/reward-add"><Button basic color="orange" content="Add Reward" /></Link>
     </div>
   );
 };

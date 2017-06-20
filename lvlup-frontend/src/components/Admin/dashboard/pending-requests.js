@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Container, Loader } from 'semantic-ui-react';
+import { Table, Loader, Dropdown } from 'semantic-ui-react';
 import renderPendingRequests from '../helpers/render-pending-requests';
 import './dashboard-styles.css';
 
@@ -8,26 +8,45 @@ const PendingRequestsTable = (props) => {
     return <Loader active inline="centered"> Loading </Loader>;
   }
   return (
-    <Container className="subsequent-table">
-      <Table celled>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell textAlign="center" colSpan="5">Pending Reward Requests</Table.HeaderCell>
-          </Table.Row>
-          <Table.Row>
-            <Table.HeaderCell>Name</Table.HeaderCell>
-            <Table.HeaderCell>Reward</Table.HeaderCell>
-            <Table.HeaderCell textAlign="center">Date Submitted</Table.HeaderCell>
-            <Table.HeaderCell textAlign="center">Notes</Table.HeaderCell>
-            <Table.HeaderCell textAlign="center">Approve</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
+    <Table celled selectable id="requests-table">
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell textAlign="center" colSpan="5" className="thead-sortable">Pending Reward Requests
+                <Dropdown text="Sort" className="sort">
+                  <Dropdown.Menu>
+                    <Dropdown.Item
+                      text="by Name Ascending"
+                      onClick={() => props.sortRequestsAsc()}
+                    />
+                    <Dropdown.Item
+                      text="by Name Descending"
+                      onClick={() => props.sortRequestsDesc()}
+                    />
+                    <Dropdown.Item
+                      text="by Date Chronological"
+                      onClick={() => props.sortRequestsChrono()}
+                    />
+                    <Dropdown.Item
+                      text="by Date Reverse Chronological"
+                      onClick={() => props.sortRequestsRevChrono()}
+                    />
+                  </Dropdown.Menu>
+                </Dropdown>
+          </Table.HeaderCell>
+        </Table.Row>
+        <Table.Row>
+          <Table.HeaderCell className="thead-secondary">Name</Table.HeaderCell>
+          <Table.HeaderCell className="thead-secondary">Reward</Table.HeaderCell>
+          <Table.HeaderCell className="thead-secondary" textAlign="center">Date Submitted</Table.HeaderCell>
+          <Table.HeaderCell className="thead-secondary" textAlign="center">Notes</Table.HeaderCell>
+          <Table.HeaderCell className="thead-secondary" textAlign="center">Approve</Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
 
-        <Table.Body>
-          {renderPendingRequests(props)}
-        </Table.Body>
-      </Table>
-    </Container>
+      <Table.Body>
+        {renderPendingRequests(props)}
+      </Table.Body>
+    </Table>
   );
 };
 

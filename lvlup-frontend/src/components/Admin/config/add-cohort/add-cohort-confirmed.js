@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 
 
 const AddCohortComplete = props => (
-  <div className="lvl-table">
-    <Table celled>
+  <div>
+    <Table celled selectable>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell textAlign="center">Add Cohorot Successful!</Table.HeaderCell>
+          <Table.HeaderCell textAlign="center" className="completed-thead">Add Cohort Successful!</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -57,7 +57,7 @@ const AddCohortComplete = props => (
       </Table.Body>
     </Table>
     <Link to={'/admin/configuration'}>
-      <Button basic color="orange">Back to Confirguration</Button>
+      <Button basic color="orange">Back to configuration</Button>
     </Link>
   </div>
 );

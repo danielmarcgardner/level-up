@@ -3,7 +3,7 @@ import PendingSubmissionsTable from './submissions-container';
 import PendingRequestsTable from './requests-container';
 
 const AdminHome = () => (
-  <div className="lvl-table">
+  <div id="admin-dash">
     <PendingSubmissionsTable />
     <PendingRequestsTable />
   </div>

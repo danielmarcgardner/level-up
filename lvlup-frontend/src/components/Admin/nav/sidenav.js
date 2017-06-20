@@ -16,10 +16,11 @@ const AdminSidenav = (props) => {
           <h4>{props.adminLoginInfo.username}</h4>
         </div>
       </Menu.Item>
-      <Link to={'/admin/dashboard'}><Menu.Item><Icon name="dashboard" />Dashboard</Menu.Item></Link>
-      <Link to={'/admin/challenges'}><Menu.Item><Icon name="chevron up" />Challenges</Menu.Item></Link>
-      <Link to={'/admin/rewards'}><Menu.Item><Icon name="gift" />Rewards</Menu.Item></Link>
-      <Link to={'/admin/configuration'}><Menu.Item><Icon name="setting" />Configuration</Menu.Item></Link>
+      <Link to={'/admin/dashboard'}><Menu.Item><Icon color="orange" className="dash-icon" name="dashboard" /><br />Dashboard</Menu.Item></Link>
+      <Link to={'/admin/challenges'}><Menu.Item><Icon color="orange" className="dash-icon" name="chevron up" /><br />Challenges</Menu.Item></Link>
+      <Link to={'/admin/rewards'}><Menu.Item><Icon color="orange" className="dash-icon" name="gift" /><br />Rewards</Menu.Item></Link>
+      <Link to={'/admin/configuration'}><Menu.Item><Icon color="orange" className="dash-icon" name="setting" /><br />Configuration</Menu.Item></Link>
+      <Link to={'/'}><Menu.Item onClick={() => props.loggingOutAdmin()}><Icon color="orange" className="dash-icon" name="sign out" /><br />Log Out</Menu.Item></Link>
     </Menu>
   );
 };

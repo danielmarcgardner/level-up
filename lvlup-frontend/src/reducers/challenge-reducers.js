@@ -1,10 +1,10 @@
 import * as CONST from '../constants/constants';
-import { selectionSortChallengeRewardName,
-  selectionSortChallengeRewardNameReverse,
-  selectionSortChallengeRewardCatagory,
-  selectionSortChallengeRewardCatagoryReverse,
-  selectionSortChallengeRewardPoints,
-  selectionSortChallengeRewardPointsReverse } from '../helpers/sort';
+import {
+  mergeSort,
+  quickSort,
+} from '../helpers/sort-date';
+import { selectionSort, insertionSortPointsChal, selectionSortTitle } from '../helpers/sort';
+import reverse from '../helpers/reverse';
 
 export const addedChallenge = (state = { fulfilled: false }, action) => {
   switch (action.type) {
@@ -23,8 +23,12 @@ export const challenges = (state = { challenges: [], fetched: false }, action) =
   switch (action.type) {
     case CONST.CHALLENGES_CAMPUS_FULFILLED:
       return Object.assign({}, state, {
-        challenges: state.challenges.concat(action.payload),
+        challenges: action.payload,
         fetched: true,
+      });
+    case CONST.RESET_AFTER_ADDED_CHALLENGE_FULFILLED:
+      return Object.assign({}, state, {
+        challenges: action.payload,
       });
     case CONST.CHALLENGES_CAMPUS_REJECTED:
       return Object.assign({}, {
@@ -36,27 +40,27 @@ export const challenges = (state = { challenges: [], fetched: false }, action) =
       });
     case CONST.SORT_CHALLENGE_TITLE:
       return Object.assign({}, state, {
-        challenges: selectionSortChallengeRewardName(state.challenges),
+        challenges: selectionSortTitle(state.challenges, 'name'),
       });
-    case CONST.SORT_CHALLENGE_CATAGORY:
+    case CONST.SORT_CHALLENGE_CATEGORY:
       return Object.assign({}, state, {
-        challenges: selectionSortChallengeRewardCatagory(state.challenges),
+        challenges: selectionSort(state.challenges, 'category_id'),
       });
     case CONST.SORT_CHALLENGE_POINTS:
       return Object.assign({}, state, {
-        challenges: selectionSortChallengeRewardPoints(state.challenges),
+        challenges: selectionSort(state.challenges, 'point_value'),
       });
     case CONST.SORT_CHALLENGE_TITLE_REVERSE:
       return Object.assign({}, state, {
-        challenges: selectionSortChallengeRewardNameReverse(state.challenges),
+        challenges: reverse(selectionSortTitle(state.challenges, 'name')),
       });
-    case CONST.SORT_CHALLENGE_CATAGORY_REVERSE:
+    case CONST.SORT_CHALLENGE_CATEGORY_REVERSE:
       return Object.assign({}, state, {
-        challenges: selectionSortChallengeRewardCatagoryReverse(state.challenges),
+        challenges: reverse(selectionSort(state.challenges, 'category_id')),
       });
     case CONST.SORT_CHALLENGE_POINTS_REVERSE:
       return Object.assign({}, state, {
-        challenges: selectionSortChallengeRewardPointsReverse(state.challenges),
+        challenges: reverse(selectionSort(state.challenges, 'point_value')),
       });
     default:
       return state;
@@ -100,14 +104,23 @@ export const selectedChallenge = (state = {}, action) => {
   }
 };
 
-export const submissions = (state = { submissions: [] }, action) => {
+export const submissions = (state = { submissions: [], fetched: false }, action) => {
   switch (action.type) {
     case CONST.SUBMISSIONS_FULFILLED:
       return Object.assign({}, state, {
-        submissions: state.submissions.concat(action.payload),
+        submissions: action.payload,
+        fetched: true,
       });
     case CONST.SUBMISSIONS_REJECTED:
       return Object.assign({}, { error: 'Server Error - Please Try Again' }, state);
+    case CONST.SORT_SUBMISSIONS_CHRONO:
+      return { ...state, submissions: mergeSort(state.submissions) };
+    case CONST.SORT_SUBMISSIONS_REV_CHRONO:
+      return { ...state, submissions: reverse(quickSort(state.submissions)) };
+    case CONST.SORT_SUBMISSIONS_ASC:
+      return { ...state, submissions: [...insertionSortPointsChal(state.submissions)] };
+    case CONST.SORT_SUBMISSIONS_DESC:
+      return { ...state, submissions: reverse(insertionSortPointsChal(state.submissions)) };
     default:
       return state;
   }

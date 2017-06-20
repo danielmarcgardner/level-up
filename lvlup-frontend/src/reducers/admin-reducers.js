@@ -1,5 +1,11 @@
 import * as CONST from '../constants/constants';
 import initialState from './initialState';
+import {
+  mergeSort,
+  quickSort,
+} from '../helpers/sort-date';
+import { bubbleSortStudent } from '../helpers/sort';
+import reverse from '../helpers/reverse';
 
 export const addedCohort = (state = { fulfilled: false }, action) => {
   switch (action.type) {
@@ -38,6 +44,14 @@ export const adminPendingSubmissions = (state = { submissionsAdmin: [] }, action
       return Object.assign({}, state, { error: 'Server Error - Please Try Again' });
     case CONST.RESET_PENDING_SUBMISSIONS:
       return Object.assign({}, { submissionsAdmin: [] });
+    case CONST.SORT_SUBMITTED_CHRONO:
+      return { ...state, submissionsAdmin: mergeSort(state.submissionsAdmin) };
+    case CONST.SORT_SUBMITTED_REV_CHRONO:
+      return { ...state, submissionsAdmin: reverse(quickSort(state.submissionsAdmin)) };
+    case CONST.SORT_SUBMITTED_ASC:
+      return { ...state, submissionsAdmin: bubbleSortStudent(state.submissionsAdmin) };
+    case CONST.SORT_SUBMITTED_DESC:
+      return { ...state, submissionsAdmin: reverse(bubbleSortStudent(state.submissionsAdmin)) };
     default:
       return state;
   }
@@ -53,6 +67,14 @@ export const adminPendingRequests = (state = { requestsAdmin: [] }, action) => {
       return Object.assign({}, state, { error: 'Server Error - Please Try Again' });
     case CONST.RESET_PENDING_REWARDS:
       return Object.assign({}, { requestsAdmin: [] });
+    case CONST.SORT_REQUESTS_CHRONO:
+      return { ...state, requestsAdmin: mergeSort(state.requestsAdmin) };
+    case CONST.SORT_REQUESTS_REV_CHRONO:
+      return { ...state, requestsAdmin: reverse(quickSort(state.requestsAdmin)) };
+    case CONST.SORT_REQUESTS_ASC:
+      return { ...state, requestsAdmin: bubbleSortStudent(state.requestsAdmin) };
+    case CONST.SORT_REQUESTS_DESC:
+      return { ...state, requestsAdmin: reverse(bubbleSortStudent(state.requestsAdmin)) };
     default:
       return state;
   }

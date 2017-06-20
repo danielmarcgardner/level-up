@@ -19,7 +19,7 @@ import StudentRewardRequest from './components/Student/requests/request-containe
 import StudentSidenav from './components/Student/nav/sidenav-container';
 import AdminSidenav from './components/Admin/nav/sidenav-container';
 import StudentDashboard from './components/Student/dashboard/dashboard-container';
-import AdminConfiguration from './components/Admin/config/config-main';
+import AdminConfiguration from './components/Admin/config/config-main-container';
 import AddCohortPage from './components/Admin/config/add-cohort/added-cohort-container';
 import AddAminCohort from './components/Admin/config/add-admin-cohort/added-admin-cohort-container';
 
@@ -28,6 +28,10 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
+
+const mapStateToProps = state => ({
+  submissions: state.submissions.submissions,
+});
 
 export default class App extends Component {
   render() {
@@ -42,31 +46,37 @@ export default class App extends Component {
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row id="main-row">
-                <Grid.Column id="content-col" width={16}>
-
+                <Grid.Column id="user-col" width={16}>
                   <Route exact path="/" component={Home} />
-                  <Route path="/student" component={StudentSidenav} />
-                  <Route path="/admin" component={AdminSidenav} />
-                  {/* </Grid.Column>
-                    <Grid.Column width={14}> */}
-                  <Route exact path="/student/dashboard" component={StudentDashboard} />
-                  <Route exact path="/student/challenges" component={StudentChallenges} />
-                  <Route path="/student/challenge-submission/:id" component={SubmissionMain} />
-                  <Route exact path="/student/rewards" component={StudentRewardsTable} />
-                  <Route exact path="/student/reward-request/:id" component={StudentRewardRequest} />
                   <Route exact path="/login-admin" component={AdminLogin} />
                   <Route exact path="/signup-admin" component={AdminSignUp} />
-                  <Route exact path="/admin/dashboard" component={AdminHome} />
-                  <Route exact path="/admin/pending-submission/:id" component={IndividualSubmission} />
-                  <Route exact path="/admin/challenges" component={AdminChallenges} />
-                  <Route exact path="/admin/rewards" component={AdminRewards} />
-                  <Route exact path="/admin/challenge-add" component={AddChallenge} />
-                  <Route exact path="/admin/challenge-edit/:id" component={EditChallenge} />
-                  <Route exact path="/admin/reward-add" component={AddReward} />
-                  <Route exact path="/admin/reward-edit/:id" component={EditReward} />
-                  <Route exact path="/admin/configuration" component={AdminConfiguration} />
-                  <Route exact path="/admin/configuration/addcohort" component={AddCohortPage} />
-                  <Route exact path="/admin/configuration/addadmincohort" component={AddAminCohort} />
+                  <Grid.Row>
+                    <Grid.Column id="nav-col" width={4}>
+                      <Route path="/student" component={StudentSidenav} />
+                      <Route path="/admin" component={AdminSidenav} />
+                    </Grid.Column>
+                    <div id="nav-pad">
+                      <Grid.Column centered id="content-col" width={12}>
+
+                        <Route exact path="/student/dashboard" component={StudentDashboard} />
+                        <Route exact path="/student/challenges" component={StudentChallenges} />
+                        <Route path="/student/challenge-submission/:id" component={SubmissionMain} />
+                        <Route exact path="/student/rewards" component={StudentRewardsTable} />
+                        <Route exact path="/student/reward-request/:id" component={StudentRewardRequest} />
+                        <Route exact path="/admin/dashboard" component={AdminHome} />
+                        <Route exact path="/admin/pending-submission/:id" component={IndividualSubmission} />
+                        <Route exact path="/admin/challenges" component={AdminChallenges} />
+                        <Route exact path="/admin/rewards" component={AdminRewards} />
+                        <Route exact path="/admin/challenge-add" component={AddChallenge} />
+                        <Route exact path="/admin/challenge-edit/:id" component={EditChallenge} />
+                        <Route exact path="/admin/reward-add" component={AddReward} />
+                        <Route exact path="/admin/reward-edit/:id" component={EditReward} />
+                        <Route exact path="/admin/configuration" component={AdminConfiguration} />
+                        <Route exact path="/admin/configuration/addcohort" component={AddCohortPage} />
+                        <Route exact path="/admin/configuration/addadmincohort" component={AddAminCohort} />
+                      </Grid.Column>
+                    </div>
+                  </Grid.Row>
                 </Grid.Column>
               </Grid.Row>
             </Grid>
